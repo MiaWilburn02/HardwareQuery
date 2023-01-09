@@ -7,3 +7,4 @@
 
 #include "Memory.h"
 #include "Query.h"
+#include "GUI.h"

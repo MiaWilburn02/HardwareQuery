@@ -1,6 +1,6 @@
 #include "CommonIncludes.h"
 
-int APIENTRY WinMain(HINSTANCE /*hInstance*/, HINSTANCE /*hPrevInstance*/, PSTR /*lpCmdLine*/, int /*nShowCmd*/)
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, PSTR /*lpCmdLine*/, int nShowCmd)
 {
 	try
 	{
@@ -13,17 +13,15 @@ int APIENTRY WinMain(HINSTANCE /*hInstance*/, HINSTANCE /*hPrevInstance*/, PSTR 
 
 		if (freopen_s(&Out, "CONOUT$", "w", stdout) != 0)
 			throw std::exception("Failed to open out stream " __FUNCTION__);
+
+		SetConsoleTitleA("Debug Console | HardwareQuery");
 #endif
 
 		Query::Init();
+		GUI::Init(hInstance, nShowCmd);
 	}
 	catch (std::exception& exception)
 	{
 		MessageBoxA(nullptr, exception.what(), "Initialization Error", MB_ICONERROR | MB_OK);
-	}
-
-	for (;;)
-	{
-
 	}
 }

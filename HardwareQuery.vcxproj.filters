@@ -8,6 +8,9 @@
     <ClCompile Include="Query.cpp">
       <Filter>Query</Filter>
     </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="SDK">
@@ -19,6 +22,9 @@
     <Filter Include="Query\Memory">
       <UniqueIdentifier>{cfa272cb-edb0-457e-bbaa-3da718a1defb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{131991f6-7f85-4c94-882e-692f4bb3b39b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonIncludes.h">
@@ -29,6 +35,9 @@
     </ClInclude>
     <ClInclude Include="Query.h">
       <Filter>Query</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
