@@ -1,0 +1,17 @@
+
+*.exe
+*.recipe
+*.ipdb
+*.iobj
+*.pdb
+*.log
+*.tlog
+*.txt
+*.obj
+*.db
+*.db-shm
+*.lock
+*.db-wal
+*.opendb
+.vs/HardwareQuery/v17/.suo
+*.vsidx
