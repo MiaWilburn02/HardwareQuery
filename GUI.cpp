@@ -33,7 +33,9 @@ namespace GUI
 
 		// Show and update our window
 		ShowWindow(WindowHWND, nShowCmd);
-		UpdateWindow(WindowHWND);
+		
+		if (!UpdateWindow(WindowHWND))
+			throw std::exception("UpdateWindow failed " __FUNCTION__);
 
 		MSG Msg = {};
 
