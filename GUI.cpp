@@ -3,10 +3,35 @@
 namespace GUI
 {
 	HWND WindowHWND;
+	
+	namespace Controls
+	{
+		HWND MemoryUsageLabel;
+
+		// Wrapper functions
+		HWND CreateLabel(const std::string& Text, int X, int Y, HINSTANCE hInstance)
+		{
+			return CreateWindowExA(0l, "STATIC", Text.c_str(), WS_VISIBLE | WS_CHILD | SS_LEFT, X, Y, 400, 100, WindowHWND, nullptr, hInstance, nullptr);
+		}
+
+		void Init(HINSTANCE hInstance)
+		{
+			MemoryUsageLabel = CreateLabel("Test", 5, 5, hInstance);
+
+			if (!MemoryUsageLabel)
+				throw std::exception("Failed to create memory usage label");
+		}
+
+		void Update()
+		{
+			// Update our memory usage label
+			SetWindowTextA(Controls::MemoryUsageLabel, std::format("Memory usage: {} percent", Query::Memory::MemoryUsage).c_str());
+		}
+	}
 
 	LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
-		//  Terminate the entire process if we close the GUI
+		// Terminate the entire process if we close the GUI
 		if (uMsg == WM_CLOSE)
 			exit(0);
 
@@ -37,13 +62,25 @@ namespace GUI
 		if (!UpdateWindow(WindowHWND))
 			throw std::exception("UpdateWindow failed " __FUNCTION__);
 
+		// Initialize our controls
+		Controls::Init(hInstance);
+
 		MSG Msg = {};
 
-		// Dispatch messages, update as needed, etc
-		while (GetMessageA(&Msg, NULL, 0, 0) > 0)
+		for (;;)
 		{
-			TranslateMessage(&Msg);
-			DispatchMessageA(&Msg);
+			// Dispatch messages, update as needed, etc
+			while (PeekMessageA(&Msg, nullptr, 0, 0, PM_REMOVE))
+			{
+				TranslateMessage(&Msg);
+				DispatchMessageA(&Msg);
+			}
+
+			// Update our controls
+			Controls::Update();
+
+			// Only update our window every 150ms
+			std::this_thread::sleep_for(std::chrono::milliseconds(150));
 		}
 	}
 }
