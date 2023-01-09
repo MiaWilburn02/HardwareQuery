@@ -1,9 +1,20 @@
 #include "CommonIncludes.h"
 
-int main()
+int APIENTRY WinMain(HINSTANCE /*hInstance*/, HINSTANCE /*hPrevInstance*/, PSTR /*lpCmdLine*/, int /*nShowCmd*/)
 {
 	try
 	{
+#ifdef _DEBUG
+		// Allow console debug information
+		FILE* Out = nullptr;
+
+		if (!AllocConsole())
+			throw std::exception("Failed to allocate console " __FUNCTION__);
+
+		if (freopen_s(&Out, "CONOUT$", "w", stdout) != 0)
+			throw std::exception("Failed to open out stream " __FUNCTION__);
+#endif
+
 		Query::Init();
 	}
 	catch (std::exception& exception)

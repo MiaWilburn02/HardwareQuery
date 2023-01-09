@@ -15,3 +15,6 @@
 *.opendb
 .vs/HardwareQuery/v17/.suo
 *.vsidx
+*.ipch
+*.ilk
+*.idb

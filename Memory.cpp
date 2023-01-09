@@ -34,8 +34,11 @@ namespace Query
 				// percentage format for us [0..100]
 				MemoryUsage = MemStatus.dwMemoryLoad;
 
+#ifdef _DEBUG
+				// Print debug information about our memory
+				printf_s("MEMORY UPDATE!\n");
 				printf_s("Memory Usage: %i Percent\n", MemoryUsage);
-
+#endif
 				std::this_thread::sleep_for(std::chrono::milliseconds(UpdateDelayMs));
 			}
 		}
